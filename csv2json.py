@@ -4,7 +4,15 @@ import csv
 
 def main():
 
-    separator = ":"    
+    if sys.argv[1] == 'help':
+        printHelp()
+    else:
+        convert2json()
+
+
+def convert2json():
+    
+    separator = ","    
     try:
         separator = str(sys.argv[4])
     except:
@@ -15,7 +23,7 @@ def main():
         datafile = open(sys.argv[2], "rU")
         outfile = open(sys.argv[3], 'a')
     except:
-        print "The parameters for this script are: data_model_file data_file output_file separator"
+        print "The parameters for this script are: csv_data_model_file csv_input_data_file output_file separator"
 
     datamodel = []
     for row in datamodelfile:
@@ -33,6 +41,11 @@ def main():
             outfile.write('\n')
         else:
             print "Datamodel does not correspond with the data"
+    
+def printHelp():
+    
+    helptext = open('README.md').read()
+    print helptext
     
 if __name__ == '__main__':
     main()
